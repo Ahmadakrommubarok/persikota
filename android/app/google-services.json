@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "808199342468",
+    "project_id": "persikota-a380d",
+    "storage_bucket": "persikota-a380d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808199342468:android:b5f5c1b49a1192b9c535d1",
+        "android_client_info": {
+          "package_name": "com.example.persikota"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808199342468-drqapcma1ecc06lnqmb5pbhs6l63o8en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4QfFekBQvex9uhXMFOseK-8HMKjTSlFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808199342468-drqapcma1ecc06lnqmb5pbhs6l63o8en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

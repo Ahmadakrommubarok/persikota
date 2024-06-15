@@ -1,0 +1,29 @@
+name: persikota
+description: "Persikota adalah sebuah aplikasi yang dirancang untuk memenuhi tugas mata kuliah pengembangan aplikasi mobile. Aplikasi ini tidak memiliki tujuan komersial atau penggunaan praktis di dunia nyata, melainkan hanya sebagai proyek pura-pura yang dibuat untuk menunjukkan pemahaman dan keterampilan dalam pengembangan aplikasi."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_core: ^3.1.0
+  firebase_auth: ^5.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+  fonts:
+    - family: PoetsenOne
+      fonts:
+        - asset: assets/fonts/PoetsenOne-Regular.ttf

@@ -27,55 +27,72 @@ class LoginView extends StatefulWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Masuk', style: myTextTheme.titleMedium),
+                    Text(
+                      'Masuk',
+                      style: myTextTheme.titleLarge?.copyWith(
+                          color: primaryBlue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 24),
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
                     Center(
                       child: ElevatedButton.icon(
                         onPressed: () {},
                         icon: Image.asset('assets/images/google.png',
                             height: 24.0),
-                        label: const Text('Lanjutkan dengan Google'),
+                        label: const Text(
+                          'Lanjutkan dengan Google',
+                        ),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
+                          backgroundColor: neutralWhite,
                           minimumSize: const Size(300, 45),
                           padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
+                              vertical: 8.0, horizontal: 8.0),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: 12.0),
                     const Row(
                       children: <Widget>[
                         Expanded(
-                          child: Divider(color: Colors.grey),
+                          child: Divider(color: gray600),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
                             'atau',
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: gray600),
                           ),
                         ),
                         Expanded(
-                          child: Divider(color: Colors.grey),
+                          child: Divider(color: gray600),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10.0),
-                    TextfieldLogin(
+                    TextfieldLoginRegister(
                       labelText: 'Alamat Email',
                       hintText: 'Masukkan email kamu',
                       controller: controller.emailController,
                       isPassword: false,
-                      controllerLogin: controller,
+                      onPressed: null,
+                      isPasswordVisible: false,
                     ),
                     const SizedBox(height: 16.0),
-                    TextfieldLogin(
+                    TextfieldLoginRegister(
                       labelText: 'Password',
                       hintText: 'Masukkan password kamu',
                       controller: controller.passwordController,
                       isPassword: true,
-                      controllerLogin: controller,
+                      onPressed: () {
+                        controller.isPasswordVisible =
+                            !controller.isPasswordVisible;
+                        controller.update();
+                      },
+                      isPasswordVisible: controller.isPasswordVisible,
                     ),
                     const SizedBox(height: 8.0),
                     Align(
@@ -129,9 +146,9 @@ class LoginView extends StatefulWidget {
                     Center(
                       child: TextButton(
                         onPressed: () {
-                          Get.offAll(HomeView());
+                          Get.offAll(const HomeView());
                         },
-                        child: Text(
+                        child: const Text(
                           'Lewati Proses Login',
                           style: TextStyle(color: primaryBlue),
                         ),

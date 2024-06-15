@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:persikota/core.dart';
 
-class TextfieldLogin extends StatefulWidget {
+class TextfieldLoginRegister extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller;
   final bool isPassword;
-  final LoginController controllerLogin;
-  const TextfieldLogin(
+  final bool isPasswordVisible;
+  final Function()? onPressed;
+  const TextfieldLoginRegister(
       {super.key,
       required this.labelText,
       required this.hintText,
       required this.isPassword,
-      required this.controllerLogin,
+      required this.onPressed,
+      required this.isPasswordVisible,
       required this.controller});
 
   @override
-  State<TextfieldLogin> createState() => _TextfieldLoginState();
+  State<TextfieldLoginRegister> createState() => _TextfieldLoginRegisterState();
 }
 
-class _TextfieldLoginState extends State<TextfieldLogin> {
+class _TextfieldLoginRegisterState extends State<TextfieldLoginRegister> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,8 +36,7 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
           const SizedBox(height: 4.0),
           TextField(
             controller: widget.controller,
-            obscureText:
-                widget.isPassword && !widget.controllerLogin.isPasswordVisible,
+            obscureText: widget.isPassword && !widget.isPasswordVisible,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
@@ -47,17 +47,11 @@ class _TextfieldLoginState extends State<TextfieldLogin> {
               suffixIcon: widget.isPassword
                   ? IconButton(
                       icon: Icon(
-                        widget.controllerLogin.isPasswordVisible
+                        widget.isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          widget.controllerLogin.isPasswordVisible =
-                              !widget.controllerLogin.isPasswordVisible;
-                        });
-                      },
-                    )
+                      onPressed: widget.onPressed)
                   : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),

@@ -112,7 +112,7 @@ TextStyle largestBebasNeue = const TextStyle(
 const Color lightBackground = Color(0xffF4F4F4);
 
 //Primary Pallete
-const Color primaryBlue = Colors.indigo;
+const Color primaryBlue = Color.fromRGBO(26, 35, 126, 1);
 const Color primaryYellow = Color(0xffFFD026);
 const Color primaryGreen = Color(0xff16A75C);
 

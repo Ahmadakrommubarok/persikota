@@ -5,10 +5,11 @@ class SplashscreenController extends State<SplashscreenView> {
   static late SplashscreenController instance;
   late SplashscreenView view;
 
-  navigateToLogin(bool statusLogin) async {
+  navigateToLogin() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-    // statusLogin ? Get.offAll(const HomeView()) : Get.offAll(const LoginView());
-    statusLogin ? Get.offAll(const LoginView()) : Get.offAll(const LoginView());
+    AccountDatabase.email == ""
+        ? Get.offAll(const LoginView())
+        : Get.offAll(const HomeView());
   }
 
   @override

@@ -7,7 +7,7 @@ class SplashscreenView extends StatefulWidget {
   Widget build(context, SplashscreenController controller) {
     controller.view = this;
 
-    controller.navigateToLogin(true);
+    controller.navigateToLogin();
 
     return Scaffold(
       backgroundColor: Colors.indigo[900],

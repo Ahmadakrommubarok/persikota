@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
-import '../view/home_view.dart';
 
 class HomeController extends State<HomeView> {
   static late HomeController instance;

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
-import '../controller/register_controller.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   Widget build(context, RegisterController controller) {
     controller.view = this;
@@ -80,6 +79,10 @@ class RegisterView extends StatefulWidget {
                       controller: controller.emailController,
                       isPassword: false,
                       onPressed: null,
+                      onChange: (val) {
+                        controller.emailController.text = val.toString();
+                        controller.update();
+                      },
                       isPasswordVisible: false,
                     ),
                     const SizedBox(height: 16.0),
@@ -91,6 +94,10 @@ class RegisterView extends StatefulWidget {
                       onPressed: () {
                         controller.isPasswordVisible =
                             !controller.isPasswordVisible;
+                        controller.update();
+                      },
+                      onChange: (val) {
+                        controller.passwordController.text = val.toString();
                         controller.update();
                       },
                       isPasswordVisible: controller.isPasswordVisible,

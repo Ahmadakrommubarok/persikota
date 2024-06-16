@@ -80,6 +80,10 @@ class LoginView extends StatefulWidget {
                       isPassword: false,
                       onPressed: null,
                       isPasswordVisible: false,
+                      onChange: (val) {
+                        controller.emailController.text = val.toString();
+                        controller.update();
+                      },
                     ),
                     const SizedBox(height: 16.0),
                     TextfieldLoginRegister(
@@ -93,6 +97,10 @@ class LoginView extends StatefulWidget {
                         controller.update();
                       },
                       isPasswordVisible: controller.isPasswordVisible,
+                      onChange: (val) {
+                        controller.passwordController.text = val.toString();
+                        controller.update();
+                      },
                     ),
                     const SizedBox(height: 8.0),
                     Align(
@@ -109,7 +117,17 @@ class LoginView extends StatefulWidget {
                     ElevatedButton(
                       onPressed: controller.emailController.text != "" &&
                               controller.passwordController.text != ""
-                          ? () {}
+                          ? () {
+                              String? emailStatus;
+                              emailStatus = controller.validateEmail(
+                                  controller.emailController.text);
+
+                              if (emailStatus == null) {
+                                controller.signIn();
+                              } else {
+                                showInfoDialog(emailStatus);
+                              }
+                            }
                           : null,
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(

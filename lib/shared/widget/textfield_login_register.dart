@@ -7,14 +7,18 @@ class TextfieldLoginRegister extends StatefulWidget {
   final bool isPassword;
   final bool isPasswordVisible;
   final Function()? onPressed;
-  const TextfieldLoginRegister(
-      {super.key,
-      required this.labelText,
-      required this.hintText,
-      required this.isPassword,
-      required this.onPressed,
-      required this.isPasswordVisible,
-      required this.controller});
+  final Function(String value) onChange;
+
+  const TextfieldLoginRegister({
+    super.key,
+    required this.labelText,
+    required this.hintText,
+    required this.isPassword,
+    required this.onPressed,
+    required this.isPasswordVisible,
+    required this.onChange,
+    required this.controller,
+  });
 
   @override
   State<TextfieldLoginRegister> createState() => _TextfieldLoginRegisterState();
@@ -31,7 +35,9 @@ class _TextfieldLoginRegisterState extends State<TextfieldLoginRegister> {
           Text(
             widget.labelText,
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.black),
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
           const SizedBox(height: 4.0),
           TextField(
@@ -42,8 +48,8 @@ class _TextfieldLoginRegisterState extends State<TextfieldLoginRegister> {
               fillColor: Colors.white,
               hintText: widget.hintText,
               prefixIcon: widget.isPassword
-                  ? const Icon(Icons.lock) // Icon gembok untuk password
-                  : const Icon(Icons.email), // Icon email untuk email
+                  ? const Icon(Icons.lock)
+                  : const Icon(Icons.email),
               suffixIcon: widget.isPassword
                   ? IconButton(
                       icon: Icon(
@@ -51,13 +57,20 @@ class _TextfieldLoginRegisterState extends State<TextfieldLoginRegister> {
                             ? Icons.visibility
                             : Icons.visibility_off,
                       ),
-                      onPressed: widget.onPressed)
+                      onPressed: widget.onPressed,
+                    )
                   : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
                 borderSide: const BorderSide(color: Colors.black),
               ),
             ),
+            onChanged: (val) {
+              setState(() {
+                widget.controller.text = val;
+                widget.onChange(val);
+              });
+            },
           ),
         ],
       ),

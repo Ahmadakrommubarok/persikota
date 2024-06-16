@@ -7,10 +7,10 @@ class PrimaryButton extends StatefulWidget {
   final String text;
 
   const PrimaryButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();

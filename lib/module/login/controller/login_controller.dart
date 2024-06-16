@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
 
@@ -10,6 +9,22 @@ class LoginController extends State<LoginView> {
   bool isPasswordVisible = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> emailKey = GlobalKey<FormState>();
+
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    return emailRegex.hasMatch(email);
+  }
+
+  String? validateEmail(String? email) {
+    if (email == null) {
+      return 'Mohon masukan email anda.';
+    }
+    if (!isValidEmail(email)) {
+      return 'Mohon masukan email dengan format yang benar.';
+    }
+    return null;
+  }
 
   Future<void> signIn() async {
     //CHECKING INTERNET
@@ -25,10 +40,17 @@ class LoginController extends State<LoginView> {
     }
 
     try {
-      await Auth().signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-    } on FirebaseException catch (e) {
-      showInfoDialog(e.message ?? "Gagal melakukan login, mohon coba kembali.");
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      AccountDatabase.save(
+        userCredential.user!.email,
+      );
+      Get.offAll(const HomeView());
+    } on FirebaseAuthException {
+      showInfoDialog("Password/email salah, mohon coba kembali.");
     }
   }
 

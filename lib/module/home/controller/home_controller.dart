@@ -19,7 +19,9 @@ class HomeController extends State<HomeView> {
     }
 
     try {
-      await Auth().signOut();
+      await FirebaseAuth.instance.signOut();
+      // Navigate to login screen or any other screen after sign-out
+      Get.offAll(const LoginView());
     } on FirebaseException catch (e) {
       showInfoDialog(
           e.message ?? "Gagal melakukan sign out, mohon coba kembali.");

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:persikota/core.dart';
 
 class LoginController extends State<LoginView> {
@@ -26,7 +27,54 @@ class LoginController extends State<LoginView> {
     return null;
   }
 
-  Future<void> signIn() async {
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        // Check if the user is already registered
+        User? firebaseUser = FirebaseAuth.instance.currentUser;
+        if (firebaseUser == null) {
+          print("USER NOT REGISTERED");
+          // User not registered, proceed with registration
+          final GoogleSignInAuthentication googleAuth =
+              await googleSignInAccount.authentication;
+          final OAuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+          final UserCredential userCredential =
+              await FirebaseAuth.instance.signInWithCredential(credential);
+
+          // Save user credentials if needed
+          AccountDatabase.save(userCredential.user!.email);
+
+          // Navigate to home view after successful registration
+          Get.offAll(const HomeView());
+        } else {
+          print("USER ALREADY REGISTERED");
+          // User already registered, proceed with sign-in
+          final GoogleSignInAuthentication googleAuth =
+              await googleSignInAccount.authentication;
+          final OAuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+          // Navigate to home view after successful sign-in
+          Get.offAll(const HomeView());
+        }
+      }
+    } catch (e) {
+      showInfoDialog("Failed to sign in with Google: $e");
+      print(e);
+    }
+  }
+
+  Future<void> signInWithEmailNPassword() async {
     //CHECKING INTERNET
     try {
       await checkConnection().timeout(const Duration(seconds: 90));
@@ -61,7 +109,11 @@ class LoginController extends State<LoginView> {
   }
 
   @override
-  void dispose() => super.dispose();
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);

@@ -65,12 +65,7 @@ class _TextfieldLoginRegisterState extends State<TextfieldLoginRegister> {
                 borderSide: const BorderSide(color: Colors.black),
               ),
             ),
-            onChanged: (val) {
-              setState(() {
-                widget.controller.text = val;
-                widget.onChange(val);
-              });
-            },
+            onChanged: widget.onChange,
           ),
         ],
       ),

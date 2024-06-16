@@ -16,8 +16,18 @@ class HomeView extends StatefulWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10.0),
-          child: const Column(
-            children: [],
+          child: Column(
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueGrey,
+                ),
+                onPressed: () {
+                  controller.signOut();
+                },
+                child: const Text("Save"),
+              ),
+            ],
           ),
         ),
       ),

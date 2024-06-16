@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persikota/core.dart';
+import 'package:persikota/firebase_options.dart';
 
 Future initialize() async {
   // Ensure that the Flutter framework is fully initialized.
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase
+      .initializeApp(); // Initialize Firebase with the default options for the current platform.
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // Set the preferred orientations to portrait up and down.
   await SystemChrome.setPreferredOrientations([

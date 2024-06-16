@@ -39,7 +39,9 @@ class LoginView extends StatefulWidget {
                     ),
                     Center(
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.signInWithGoogle();
+                        },
                         icon: Image.asset('assets/images/google.png',
                             height: 24.0),
                         label: const Text(
@@ -123,7 +125,7 @@ class LoginView extends StatefulWidget {
                                   controller.emailController.text);
 
                               if (emailStatus == null) {
-                                controller.signIn();
+                                controller.signInWithEmailNPassword();
                               } else {
                                 showInfoDialog(emailStatus);
                               }

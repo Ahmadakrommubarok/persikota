@@ -29,6 +29,13 @@
             {
               "client_id": "808199342468-drqapcma1ecc06lnqmb5pbhs6l63o8en.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "808199342468-bao53ho3c46giorbg332erg2gil146pn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.persikota"
+              }
             }
           ]
         }

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 
 BuildContext get globalContext {
@@ -52,9 +54,7 @@ class Get {
 
 extension ChangeNotifierExtension on State {
   update() {
-    if (mounted) {
-      setState(() {});
-    }
+    setState(() {});
   }
 }
 

@@ -11,6 +11,41 @@ class LoginController extends State<LoginView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> emailKey = GlobalKey<FormState>();
+  bool isLupaPassword = false;
+
+  Future<void> resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailController.text.trim(),
+      );
+      showResetDialog('Reset Email Sent',
+          'Instruksi penggantian password sudah dikirimkan ke ${emailController.text}. Tolong periksa kembali email anda.');
+    } catch (e) {
+      showResetDialog('Gagal merubah password, ', e.toString());
+    }
+  }
+
+  void showResetDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: PrimaryButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  text: "Ok"),
+            )
+          ],
+        );
+      },
+    );
+  }
 
   bool isValidEmail(String email) {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
@@ -37,7 +72,6 @@ class LoginController extends State<LoginView> {
         // Check if the user is already registered
         User? firebaseUser = FirebaseAuth.instance.currentUser;
         if (firebaseUser == null) {
-          print("USER NOT REGISTERED");
           // User not registered, proceed with registration
           final GoogleSignInAuthentication googleAuth =
               await googleSignInAccount.authentication;
@@ -54,7 +88,6 @@ class LoginController extends State<LoginView> {
           // Navigate to home view after successful registration
           Get.offAll(const HomeView());
         } else {
-          print("USER ALREADY REGISTERED");
           // User already registered, proceed with sign-in
           final GoogleSignInAuthentication googleAuth =
               await googleSignInAccount.authentication;
@@ -70,7 +103,6 @@ class LoginController extends State<LoginView> {
       }
     } catch (e) {
       showInfoDialog("Failed to sign in with Google: $e");
-      print(e);
     }
   }
 

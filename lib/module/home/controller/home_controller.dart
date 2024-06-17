@@ -6,10 +6,12 @@ class HomeController extends State<HomeView> {
   late HomeView view;
 
   Future<void> signOut() async {
+    showLoadingWidget();
     //CHECKING INTERNET
     try {
       await checkConnection().timeout(const Duration(seconds: 90));
     } on DioException catch (e) {
+      Get.back();
       if (e.error.toString().contains("Connection failed")) {
         showInfoDialog(
             "Mohon maaf, koneksi ke server gagal tersambung setelah 90 detik. Periksa kembali koneksi Anda!");
@@ -21,8 +23,10 @@ class HomeController extends State<HomeView> {
     try {
       await FirebaseAuth.instance.signOut();
       // Navigate to login screen or any other screen after sign-out
+      Get.back();
       Get.offAll(const LoginView());
     } on FirebaseException catch (e) {
+      Get.back();
       showInfoDialog(
           e.message ?? "Gagal melakukan sign out, mohon coba kembali.");
     }

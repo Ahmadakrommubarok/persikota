@@ -9,25 +9,37 @@ class RegisterController extends State<RegisterView> {
   bool isPasswordVisible = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  Future<void> signIn() async {
-    //CHECKING INTERNET
+  Future<void> register() async {
+    showLoadingWidget();
+    // Check internet connection
     try {
       await checkConnection().timeout(const Duration(seconds: 90));
     } on DioException catch (e) {
+      Get.back();
       if (e.error.toString().contains("Connection failed")) {
         showInfoDialog(
             "Mohon maaf, koneksi ke server gagal tersambung setelah 90 detik. Periksa kembali koneksi Anda!");
       } else {
         showInfoDialog(e.toString().replaceAll("Exception: ", ""));
       }
+      return; // Exit function if connection check fails
     }
 
     try {
-      await Auth().createUserWithEmailAndPassword(
-          email: "emailController.text", password: "passwordController.text");
-    } on FirebaseException catch (e) {
-      showInfoDialog(e.message ?? "Gagal melakukan login, mohon coba kembali.");
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      // If registration succeeds, proceed with next steps
+      signInWithEmailNPassword(
+          email: emailController.text,
+          password: passwordController.text,
+          isDirectApproach: false);
+    } catch (e) {
+      Get.back();
+      // Handle registration failure
+      showErrorDialog('Mohon maaf proses pendaftaran gagal', e.toString());
     }
   }
 

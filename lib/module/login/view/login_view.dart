@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
-import 'package:persikota/module/login/widget/header_login_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -27,7 +26,12 @@ class LoginView extends StatefulWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    HeaderLoginWidget(controller: controller),
+                    HeaderLoginRegisterWidget(
+                      title: 'Masuk',
+                      onPressedSignWithGoogle: () {
+                        signInWithGoogle(isDirectApproach: true);
+                      },
+                    ),
                     controller.isLupaPassword
                         ? Column(
                             children: [
@@ -50,7 +54,7 @@ class LoginView extends StatefulWidget {
                                 onPressed: controller.emailController.text != ""
                                     ? () {
                                         String? emailStatus;
-                                        emailStatus = controller.validateEmail(
+                                        emailStatus = validateEmail(
                                             controller.emailController.text);
 
                                         if (emailStatus == null) {
@@ -152,11 +156,16 @@ class LoginView extends StatefulWidget {
                                         controller.passwordController.text != ""
                                     ? () {
                                         String? emailStatus;
-                                        emailStatus = controller.validateEmail(
+                                        emailStatus = validateEmail(
                                             controller.emailController.text);
 
                                         if (emailStatus == null) {
-                                          controller.signInWithEmailNPassword();
+                                          signInWithEmailNPassword(
+                                              email: controller
+                                                  .emailController.text,
+                                              password: controller
+                                                  .passwordController.text,
+                                              isDirectApproach: true);
                                         } else {
                                           showInfoDialog(emailStatus);
                                         }

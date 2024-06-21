@@ -22,28 +22,8 @@ class HomeView extends StatefulWidget {
           ),
         ),
       ),
-      Container(
-        height: 100.0,
-        decoration: const BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              8.0,
-            ),
-          ),
-        ),
-      ),
-      Container(
-        height: 100.0,
-        decoration: const BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              8.0,
-            ),
-          ),
-        ),
-      ),
+      const MatchesPage(),
+      const ShopingContent()
     ];
 
     return Scaffold(
@@ -58,15 +38,15 @@ class HomeView extends StatefulWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.newspaper_sharp),
-            label: 'News',
+            label: 'Berita',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined),
-            label: 'Matches',
+            label: 'Pertandingan',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Shopping',
+            label: 'Katalog',
           ),
         ],
         currentIndex: controller.selectedIndex,

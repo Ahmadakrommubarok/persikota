@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '808199342468',
     projectId: 'persikota-a380d',
     storageBucket: 'persikota-a380d.appspot.com',
+    androidClientId: '808199342468-0s2jnhun34jdfr66mpj1af538f1oct1j.apps.googleusercontent.com',
     iosClientId: '808199342468-bao53ho3c46giorbg332erg2gil146pn.apps.googleusercontent.com',
     iosBundleId: 'com.example.persikota',
   );
@@ -74,6 +75,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '808199342468',
     projectId: 'persikota-a380d',
     storageBucket: 'persikota-a380d.appspot.com',
+    androidClientId: '808199342468-0s2jnhun34jdfr66mpj1af538f1oct1j.apps.googleusercontent.com',
     iosClientId: '808199342468-bao53ho3c46giorbg332erg2gil146pn.apps.googleusercontent.com',
     iosBundleId: 'com.example.persikota',
   );

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "808199342468-0s2jnhun34jdfr66mpj1af538f1oct1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.persikota",
+            "certificate_hash": "83a229080b3d771b23f4de8338a4472ce6976e8b"
+          }
+        },
+        {
           "client_id": "808199342468-drqapcma1ecc06lnqmb5pbhs6l63o8en.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -47,17 +47,6 @@ class HomeView extends StatefulWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blueGrey,
-          ),
-          onPressed: () {
-            controller.signOut();
-          },
-          child: const Text("Sign out"),
-        ),
-      ),
       body: Center(
         child: widgetOptions.elementAt(controller.selectedIndex),
       ),

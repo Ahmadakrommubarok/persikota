@@ -1,9 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
 
 class HomeController extends State<HomeView> {
   static late HomeController instance;
   late HomeView view;
+
+  int selectedIndex = 0;
+
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   Future<void> signOut() async {
     showLoadingWidget();

@@ -20,6 +20,8 @@ Future<void> signInWithGoogle({required bool isDirectApproach}) async {
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
 
+    Get.back();
+
     if (googleSignInAccount != null) {
       // Check if the user is already registered
       User? firebaseUser = FirebaseAuth.instance.currentUser;

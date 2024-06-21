@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persikota/core.dart';
-import 'package:persikota/model/news_model.dart';
 
 class DashboardContent extends StatefulWidget {
   final HomeController controller;
@@ -29,7 +28,7 @@ class _DashboardContentState extends State<DashboardContent> {
               ),
               TextButton(
                 onPressed: () {
-                  // _showTentangPersikotaMenu(context);
+                  showTentangPersikotaMenu(context);
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -67,12 +66,14 @@ class _DashboardContentState extends State<DashboardContent> {
 
             if (snapshot.hasError) {
               return Center(
-                  child: Text('Gagal mengambil data: ${snapshot.error}'));
+                child: Text('Gagal mengambil data: ${snapshot.error}'),
+              );
             }
 
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
               return const Center(
-                  child: Text('Tidak ada berita yang tersedia'));
+                child: Text('Tidak ada berita yang tersedia'),
+              );
             }
 
             final newsList = snapshot.data!.docs

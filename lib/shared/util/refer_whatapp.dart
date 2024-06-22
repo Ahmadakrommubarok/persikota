@@ -18,7 +18,6 @@ void launchWhatsAppOrder() async {
       throw 'Could not launch $url';
     }
   } catch (e) {
-    print("Error: $e");
     // Handle if WhatsApp cannot be launched
     bool isBrowserOpened = await launchInBrowser(url);
     if (!isBrowserOpened) {

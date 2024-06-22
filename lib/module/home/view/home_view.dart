@@ -11,17 +11,7 @@ class HomeView extends StatefulWidget {
       DashboardContent(
         controller: controller,
       ),
-      Container(
-        height: 100.0,
-        decoration: const BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              8.0,
-            ),
-          ),
-        ),
-      ),
+      const NewsContent(),
       const MatchesPage(),
       const ShopingContent()
     ];

@@ -61,7 +61,7 @@ class _DashboardContentState extends State<DashboardContent> {
           stream: widget.controller.firestore.collection('news').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const LoadingWidget();
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.hasError) {

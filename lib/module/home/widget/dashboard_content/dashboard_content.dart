@@ -13,6 +13,8 @@ class DashboardContent extends StatefulWidget {
 class _DashboardContentState extends State<DashboardContent> {
   @override
   Widget build(BuildContext context) {
+    print("AccountDatabase.email");
+    print(AccountDatabase.email);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -122,7 +124,7 @@ class _DashboardContentState extends State<DashboardContent> {
         Center(
           child: TextButton(
             onPressed: () {
-              AccountDatabase.email == null
+              AccountDatabase.email == ""
                   ? Get.offAll(const LoginView())
                   : widget.controller.signOut();
             },
@@ -134,7 +136,7 @@ class _DashboardContentState extends State<DashboardContent> {
               ),
             ),
             child: Text(
-              AccountDatabase.email == null ? "Login" : 'Keluar',
+              AccountDatabase.email == "" ? "Login" : 'Keluar',
               style: const TextStyle(
                 color: red800,
               ),

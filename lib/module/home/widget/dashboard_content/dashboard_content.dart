@@ -122,7 +122,9 @@ class _DashboardContentState extends State<DashboardContent> {
         Center(
           child: TextButton(
             onPressed: () {
-              widget.controller.signOut();
+              AccountDatabase.email == null
+                  ? Get.offAll(const LoginView())
+                  : widget.controller.signOut();
             },
             style: TextButton.styleFrom(
               foregroundColor: red800,
@@ -131,9 +133,9 @@ class _DashboardContentState extends State<DashboardContent> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: const Text(
-              'Keluar',
-              style: TextStyle(
+            child: Text(
+              AccountDatabase.email == null ? "Login" : 'Keluar',
+              style: const TextStyle(
                 color: red800,
               ),
             ),
